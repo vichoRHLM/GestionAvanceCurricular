@@ -15,19 +15,19 @@ public class Profesor {
     private String sFechaNacimiento;
     private String sRut;
     private String sCorreoElectronico;
-    private ArrayList <String> alAsignaturasAsignadas;
+    //private ArrayList <String> alAsignaturasAsignadas;
     
     
     
     //Analizar constructores
-    public Profesor(String sNombre, String sApellido, String sFechaNacimiento, String sRut, String sCorreoElectronico, ArrayList <String> alAsignaturasAsignadas) {
+    public Profesor(String sNombre, String sApellido, String sFechaNacimiento, String sRut, String sCorreoElectronico /*ArrayList <String> alAsignaturasAsignadas*/) {
         this.sNombre = sNombre;
         this.sApellido = sApellido;
         this.sFechaNacimiento = sFechaNacimiento;
         this.sRut = sRut;
         this.sCorreoElectronico = sCorreoElectronico;
-        this.alAsignaturasAsignadas = new ArrayList<> ();
-        this.alAsignaturasAsignadas.addAll(alAsignaturasAsignadas);
+        //this.alAsignaturasAsignadas = new ArrayList<> ();
+        //this.alAsignaturasAsignadas.addAll(alAsignaturasAsignadas);
     }
 
     public Profesor() {
@@ -36,7 +36,7 @@ public class Profesor {
         this.sFechaNacimiento = "";
         this.sRut = "";
         this.sCorreoElectronico = "";
-        this.alAsignaturasAsignadas = new ArrayList<>();
+        //this.alAsignaturasAsignadas = new ArrayList<>();
     }
 
     public String getsNombre() {

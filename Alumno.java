@@ -14,6 +14,8 @@ public class Alumno {
     private String sFechaNacimiento;
     private String sRut;
     private String sCorreoElectronico;
+    //Lista de asignaturas aprobadas
+    //Listas de asignaturas 
     
     
     public Alumno(String sNombre, String sApellido, String sFechaNacimiento, String sRut, String sCorreoElectronico) {
@@ -22,6 +24,15 @@ public class Alumno {
         this.sFechaNacimiento = sFechaNacimiento;
         this.sRut = sRut;
         this.sCorreoElectronico = sCorreoElectronico;
+    }
+    
+    //Opcional
+    public Alumno(Alumno nuevoAlumno) {
+        this.sNombre = nuevoAlumno.sNombre;
+        this.sApellido = nuevoAlumno.sApellido;
+        this.sFechaNacimiento = nuevoAlumno.sFechaNacimiento;
+        this.sRut = nuevoAlumno.sRut;
+        this.sCorreoElectronico = nuevoAlumno.sCorreoElectronico;
     }
     
     public Alumno() {
@@ -33,18 +44,12 @@ public class Alumno {
     }
 
 
-    public String getsNombre() {
-        return sNombre;
-    }
+    public String getsNombre() { return sNombre; }
 
-    public void setsNombre(String sNombre) {
-        this.sNombre = sNombre;
-    }
+    public void setsNombre(String sNombre) { this.sNombre = sNombre; }
 
-    public String getsApellido() {
-        return sApellido;
-    }
-
+    public String getsApellido() { return sApellido; }
+     
     public void setsApellido(String sApellido) {
         this.sApellido = sApellido;
     }

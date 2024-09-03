@@ -64,10 +64,19 @@ public class Asignatura {
     public void setAlumnosInscritos(ArrayList<Alumno> alAlumnosInscritos) {
         this.alAlumnosInscritos = alAlumnosInscritos;
     }
-
     
+    public void agregarAlumno (Alumno alumnoInscribir){
+        this.alAlumnosInscritos.add(alumnoInscribir);
+        //Validar 
+    }
     
+    public void agregarAsignatura(){
+        //en proceso...
+    }
         
-    
+    public void mostrarAsignatura(){
+        //en proceso...
+        System.out.println(this.sNombre + " " + this.sCodigo);
+    }
 
 }
