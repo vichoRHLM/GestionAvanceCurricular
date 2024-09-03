@@ -1,23 +1,27 @@
-
 package gestionavancecurricular;
+
 
 import java.util.*;
 
 public class GestionAvanceCurricular {
     // Declarar listas de listas de asignaturas
-    static ArrayList<Asignatura> asignaturas;
-    static HashMap<String, Asignatura> mallaCurricular;
+    static MallaCurricular mc;
     
     
     public static void main(String[] args) {
         
+        mc = new MallaCurricular();
         
-        llenadoMallaCurricular(mallaCurricular);
+        llenadoMallaCurricular();
+        menu();
+        
+        
+        
         
     }
     
     
-    public static void llenadoMallaCurricular(HashMap mallaCurricular) {                     
+    public static void llenadoMallaCurricular() {                     
         //Profesores
         Profesor profe_1 = new Profesor("Ricardo", "Guzman", "21/03/1980", "14203819-5", "RicardGuz.man@gmail.com");
         Profesor profe_2 = new Profesor("Daniel", "Prieto", "03/07/1973", "12361710-9", "D.prieto27@gmail.com");
@@ -26,7 +30,7 @@ public class GestionAvanceCurricular {
         Profesor profe_5 = new Profesor("Richard", "Rios", "30/08/1968", "10824100-0", "richardHsgRios7@gmail.com");
         Profesor profe_6 = new Profesor("Sergio", "Opazo", "25/||/1991", "18409443-8", "opazo.sergio.l@gmail.com");
         Profesor profe_7 = new Profesor("Pablo", "Saldivia", "02/01/1988", "17132687-4", "PbloSaldi2029@gmail.com");
-        Profesor profe_8= new Profesor("Armando", "Solari", "07/02/1977", "13103988-6", "solariArmandoRHLM@gmail.com");
+        Profesor profe_8 = new Profesor("Armando", "Solari", "07/02/1977", "13103988-6", "solariArmandoRHLM@gmail.com");
         Profesor profe_9 = new Profesor("Ernesto", "Morales", "19/05/1995", "19014209-2", "ErnestoMoralesMora177@gmail.com");
         Profesor profe_10 = new Profesor("Moises", "Gonzales", "14/04/1979", "14678202-3", "MoiGonzaHttp@gmail.com");
         
@@ -80,6 +84,8 @@ public class GestionAvanceCurricular {
         alumnosAInscribir.add(alumno_20);
         
         
+        
+        
         //Semestres
         //sem 1 
         //CADA ASIGNATURA DEBE TENER SU PROPIA ASIGNATURA CON SUS PROPIOS ALUMNOS
@@ -120,9 +126,11 @@ public class GestionAvanceCurricular {
         //saem8
         Asignatura asignatura_21 = new Asignatura ("LEGISLACION, ETICA Y TECNOLOGIA", "INF4459", profe_6, alumnosAInscribir);
         Asignatura asignatura_22 = new Asignatura ("PROYECTO DE TITULO", "INF4560", profe_5, alumnosAInscribir);
+
         
-        //Llenado de semestres
+        ArrayList<Asignatura> asignaturas;
         asignaturas = new ArrayList<>();
+        //Llenado de semestres
         asignaturas.add(asignatura_1);
         asignaturas.add(asignatura_2);
         asignaturas.add(asignatura_3);
@@ -203,7 +211,14 @@ public class GestionAvanceCurricular {
         
         
         //Llenado del hashMapp correspondiente a la malla curricular :D
+        
+       
+                
+        
+        
+        HashMap<String, ArrayList<Asignatura>> mallaCurricular;
         mallaCurricular = new HashMap<>();
+        
         mallaCurricular.put("Sem1", semestre_1);
         mallaCurricular.put("Sem2", semestre_2);
         mallaCurricular.put("Sem3", semestre_3);
@@ -212,6 +227,8 @@ public class GestionAvanceCurricular {
         mallaCurricular.put("Sem6", semestre_6);
         mallaCurricular.put("Sem7", semestre_7);
         mallaCurricular.put("Sem8", semestre_8);
+        
+        mc.setMallaCurricular(mallaCurricular);
     }
     
     public static void menuAlumno(){
@@ -227,5 +244,35 @@ public class GestionAvanceCurricular {
     public static void menuProfesor(){
         // Con contraseña de profesor
         
+    }
+    
+    public static void menu()
+    {
+        Scanner lector = new Scanner(System.in);
+        int opcion;
+        do{
+            System.out.println("Opciones");
+            System.out.println("1.- Agregar ALumno");
+            System.out.println("2.- Mostrar Alumno Inscritos");
+            System.out.println("3.- FIN");
+            System.out.println("Ingreses u opcion a elegir puñeta");
+            opcion = lector.nextInt();
+            lector.nextLine();
+            switch (opcion) {
+                case 1 -> {
+                    mc.getMallaCurricular().get("Sem1").get(0).crearAlumnoPorConsola(lector);
+                    break;
+                }
+                case 2 -> {
+                    System.out.println(); mc.getMallaCurricular().get("Sem1").get(0).mostrarAlumnosAsignatura();
+                    break;
+                }
+                case 3 -> {
+                    System.out.println("fin");
+            }
+                default -> System.out.println("Numero incorreto");
+            }
+            
+        }while(opcion != 3);
     }
 }

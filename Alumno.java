@@ -78,6 +78,9 @@ public class Alumno {
         this.sCorreoElectronico = sCorreoElectronico;
     }
     
+    public void agregarAlumno() {
+        
+    }
     
     
 }

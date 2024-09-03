@@ -66,17 +66,43 @@ public class Asignatura {
     }
     
     public void agregarAlumno (Alumno alumnoInscribir){
-        this.alAlumnosInscritos.add(alumnoInscribir);
-        //Validar 
+        Boolean enArreglo = false;
+        for (int i = 0; i < alAlumnosInscritos.size();i++){
+            if(alAlumnosInscritos.get(i).getsRut().equals(alumnoInscribir.getsRut())){
+                enArreglo=true;      
+            }
+        }
+        if (enArreglo == false){
+            this.alAlumnosInscritos.add(alumnoInscribir);
+            System.out.println("Se agrego el alumno correctamente");
+        } else
+            System.out.println("El alumno ya se encuentra inscrito");   
     }
     
-    public void agregarAsignatura(){
-        //en proceso...
+    public void crearAlumnoPorConsola(Scanner lector){
+        Alumno aAlum = new Alumno(); 
+        System.out.println("Ingrese datos del alumno:");
+        System.out.println("1.- Rut:(12345678-9)");
+        aAlum.setsRut(lector.nextLine());
+        System.out.println("2.- Nombre :");
+        aAlum.setsNombre(lector.nextLine());
+        System.out.println("3.- Apellido :");
+        aAlum.setsApellido(lector.nextLine());
+        System.out.println("4.- Fecha de Nacimiento :");
+        aAlum.setsFechaNacimiento(lector.nextLine());
+        System.out.println("5.- Correo Electronico :");
+        aAlum.setsCorreoElectronico(lector.nextLine());
+        agregarAlumno(aAlum);
+                   
+        
     }
         
-    public void mostrarAsignatura(){
-        //en proceso...
-        System.out.println(this.sNombre + " " + this.sCodigo);
+    public void mostrarAlumnosAsignatura(){
+        for(int i = 0; i< alAlumnosInscritos.size(); i++)
+        {
+            System.out.println(alAlumnosInscritos.get(i).getsNombre() + " " + alAlumnosInscritos.get(i).getsApellido());
+        }
+     
     }
 
 }

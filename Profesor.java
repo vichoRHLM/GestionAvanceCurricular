@@ -78,4 +78,7 @@ public class Profesor {
     public void setsCorreoElectronico(String sCorreoElectronico) {
         this.sCorreoElectronico = sCorreoElectronico;
     }
+    
+    
+    
 }
