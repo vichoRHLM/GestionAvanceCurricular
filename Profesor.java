@@ -3,12 +3,6 @@ package gestionavancecurricular;
     
 import java.util.ArrayList;
 
-/**
- *
- * @author Sebastian Espinoza Rivera
- * 
- * 
- */
 public class Profesor {
     private String sNombre;
     private String sApellido;
@@ -78,7 +72,5 @@ public class Profesor {
     public void setsCorreoElectronico(String sCorreoElectronico) {
         this.sCorreoElectronico = sCorreoElectronico;
     }
-    
-    
     
 }

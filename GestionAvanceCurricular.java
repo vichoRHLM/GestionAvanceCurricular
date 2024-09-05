@@ -5,15 +5,14 @@ import java.util.*;
 
 public class GestionAvanceCurricular {
     // Declarar listas de listas de asignaturas
-    static MallaCurricular mc;
-    
+    public MallaCurricular mallaInf;
     
     public static void main(String[] args) {
         
-        mc = new MallaCurricular();
-        
-        llenadoMallaCurricular();
-        menu();
+        MallaCurricular  mallaInf = new MallaCurricular();
+        ArrayList <Profesor> listaProfes = new ArrayList<>();
+        llenadoMallaCurricular(mallaInf, listaProfes);
+        menu(mallaInf, listaProfes);
         
         
         
@@ -21,7 +20,7 @@ public class GestionAvanceCurricular {
     }
     
     
-    public static void llenadoMallaCurricular() {                     
+    public static void llenadoMallaCurricular(MallaCurricular mc, ArrayList <Profesor> listaProfes) {                     
         //Profesores
         Profesor profe_1 = new Profesor("Ricardo", "Guzman", "21/03/1980", "14203819-5", "RicardGuz.man@gmail.com");
         Profesor profe_2 = new Profesor("Daniel", "Prieto", "03/07/1973", "12361710-9", "D.prieto27@gmail.com");
@@ -34,6 +33,19 @@ public class GestionAvanceCurricular {
         Profesor profe_9 = new Profesor("Ernesto", "Morales", "19/05/1995", "19014209-2", "ErnestoMoralesMora177@gmail.com");
         Profesor profe_10 = new Profesor("Moises", "Gonzales", "14/04/1979", "14678202-3", "MoiGonzaHttp@gmail.com");
         
+        listaProfes.add(profe_1);
+        listaProfes.add(profe_2);
+        listaProfes.add(profe_3);
+        listaProfes.add(profe_4);
+        listaProfes.add(profe_5);
+        listaProfes.add(profe_6);
+        listaProfes.add(profe_7);
+        listaProfes.add(profe_8);
+        listaProfes.add(profe_9);
+        listaProfes.add(profe_10);
+        
+        
+       
         //Alumnos
         Alumno alumno_0 = new Alumno("Sebastian", "Espinoza", "04/10/2004", "21672303-1", "sebax7p0@gmail.com");
         Alumno alumno_1 = new Alumno("Juan", "Pérez", "12/01/2000", "12.345.678-9", "juan.perez@example.com");
@@ -246,21 +258,27 @@ public class GestionAvanceCurricular {
         
     }
     
-    public static void menu()
+    public static void menu(MallaCurricular mc, ArrayList<Profesor> listaProfes)
     {
         Scanner lector = new Scanner(System.in);
+        
         int opcion;
         do{
             System.out.println("Opciones");
+            System.out.println("0.- FIN");
             System.out.println("1.- Agregar ALumno");
             System.out.println("2.- Mostrar Alumno Inscritos");
-            System.out.println("3.- FIN");
+            System.out.println("3.- Agregar asignatura");
             System.out.println("Ingreses u opcion a elegir puñeta");
             opcion = lector.nextInt();
             lector.nextLine();
             switch (opcion) {
+                case 0 -> {
+                    System.out.println("Fin");
+                    break;
+                }
                 case 1 -> {
-                    mc.getMallaCurricular().get("Sem1").get(0).crearAlumnoPorConsola(lector);
+                    //mc(lector, listaProfes);
                     break;
                 }
                 case 2 -> {
@@ -268,7 +286,9 @@ public class GestionAvanceCurricular {
                     break;
                 }
                 case 3 -> {
-                    System.out.println("fin");
+                    mc.crearAsignaturaPorCosola(lector, listaProfes);
+                    
+                    break;
             }
                 default -> System.out.println("Numero incorreto");
             }

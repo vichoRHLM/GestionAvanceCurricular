@@ -79,7 +79,32 @@ public class Asignatura {
             System.out.println("El alumno ya se encuentra inscrito");   
     }
     
-    public void crearAlumnoPorConsola(Scanner lector){
+    
+    public void asignarProfesorExistente(String rut, ArrayList <Profesor> listaProfes)
+    {
+        Profesor profesorAsignar = buscarProfesorPorRut(listaProfes, rut);
+        if(profesorAsignar != null){
+            this.profesorAsignado = profesorAsignar;
+            System.out.println("El profesor "+profesorAsignar.getsNombre()+" "+profesorAsignar.getsApellido()+" se ha asignado correctamente a su nueva asinatura");
+        }
+        else{
+            this.profesorAsignado = null;
+        }
+    }
+    
+    public Profesor buscarProfesorPorRut(ArrayList <Profesor> listaProfes, String rut){
+        
+        for (int i = 0; i < listaProfes.size();i++)
+        {
+            Profesor profesorBuscado = listaProfes.get(i);
+            if(profesorBuscado.getsRut().equals(rut))
+                return profesorBuscado;
+        }
+        return null;
+    }
+    
+    public void crearAlumnoPorConsola(Scanner lector, MallaCurricular mc){
+        
         Alumno aAlum = new Alumno(); 
         System.out.println("Ingrese datos del alumno:");
         System.out.println("1.- Rut:(12345678-9)");
@@ -104,5 +129,6 @@ public class Asignatura {
         }
      
     }
+
 
 }
