@@ -20,6 +20,63 @@ public class GestionAvanceCurricular {
     }
     
     
+    public static void menu(MallaCurricular mc, ArrayList<Profesor> listaProfes)
+    {
+        Scanner lector = new Scanner(System.in);
+        
+        
+        int opcion;
+        do{
+            System.out.println("BIENVENIDO A LA GESTION DE TU AVANCE CURRICULAR, "
+                    + "POR FAVOR SELECIONE UNA OPCION");
+            System.out.println("0.- FIN");
+            System.out.println("1.- AGREGAR UN ALUMNO");
+            System.out.println("2.- MOSTRAR LA MALLA CURRICULAR");
+            System.out.println("3.- AGREGAR UNA ASIGNATURA A LA MALLA");
+            System.out.println("Ingrese su opcion:");
+            opcion = lector.nextInt();
+            lector.nextLine();
+            switch (opcion) {
+                case 0 -> {
+                    System.out.println("FIN DEL PROGRAMA");
+                    break;
+                }
+                case 1 -> {
+                    mc.menuParaAgregarAlumnoaAsignatura(lector);
+                    
+                    break;
+                }
+                case 2 -> {
+                    mc.mostrarMallaCurricular();
+                    break;
+                }
+                case 3 -> {
+                    mc.crearAsignaturaPorCosola(lector, listaProfes);
+                    
+                    break;
+                }
+                default -> System.out.println("OPCION INCORRECTA, POR FAVOR INTENTE DE NUEVO");
+            }
+            
+        }while(opcion != 0);
+    }
+    
+    /**
+     * Método que asigna datos base a las variables <code>mc</code> y 
+     * <code>listaProfes</code>. Primero se define una lista de profesores con 
+     * datos predefinidos. Luego se define una lista de alumnos con datos 
+     * predefinidos, por el momento solo se han implementado 21 alumnos. 
+     * En tercer lugar, se definen los datos para las asignaturas, en donde 
+     * se añade la lista de alumnos, que por el momento todos los alumnos estan 
+     * en todas las asignaturas, cosa que no tiene sentido lógico. 
+     * Sin embargo para pruebas de mostrar y agregar de la asignatura, 
+     * se ha implementado así. Luego se añaden las asignaturas a los 
+     * distintos semestres. Por ultimo se agregan las listas de asignaturas 
+     * (semestres) al HashMap <code>mc</code> en sus distintos semestres (Keys 
+     * tipo String con formato: "Sem1", "Sem2", "SemN").
+     * @param mc Objeto tipo <code>MallaCurricular</code> que maneja la Malla Curricular
+     * @param listaProfes Lista de alumnos para buscar el alumno que se desea agregar a <code>alAlumnosInscritos</code>.
+     */
     public static void llenadoMallaCurricular(MallaCurricular mc, ArrayList <Profesor> listaProfes) {                     
         //Profesores
         Profesor profe_1 = new Profesor("Ricardo", "Guzman", "21/03/1980", "14203819-5", "RicardGuz.man@gmail.com");
@@ -33,6 +90,7 @@ public class GestionAvanceCurricular {
         Profesor profe_9 = new Profesor("Ernesto", "Morales", "19/05/1995", "19014209-2", "ErnestoMoralesMora177@gmail.com");
         Profesor profe_10 = new Profesor("Moises", "Gonzales", "14/04/1979", "14678202-3", "MoiGonzaHttp@gmail.com");
         
+        //Listado Profesores
         listaProfes.add(profe_1);
         listaProfes.add(profe_2);
         listaProfes.add(profe_3);
@@ -43,7 +101,6 @@ public class GestionAvanceCurricular {
         listaProfes.add(profe_8);
         listaProfes.add(profe_9);
         listaProfes.add(profe_10);
-        
         
        
         //Alumnos
@@ -97,7 +154,6 @@ public class GestionAvanceCurricular {
         
         
         
-        
         //Semestres
         //sem 1 
         //CADA ASIGNATURA DEBE TENER SU PROPIA ASIGNATURA CON SUS PROPIOS ALUMNOS
@@ -138,34 +194,7 @@ public class GestionAvanceCurricular {
         //saem8
         Asignatura asignatura_21 = new Asignatura ("LEGISLACION, ETICA Y TECNOLOGIA", "INF4459", profe_6, alumnosAInscribir);
         Asignatura asignatura_22 = new Asignatura ("PROYECTO DE TITULO", "INF4560", profe_5, alumnosAInscribir);
-
-        
-        ArrayList<Asignatura> asignaturas;
-        asignaturas = new ArrayList<>();
-        //Llenado de semestres
-        asignaturas.add(asignatura_1);
-        asignaturas.add(asignatura_2);
-        asignaturas.add(asignatura_3);
-        asignaturas.add(asignatura_4);
-        asignaturas.add(asignatura_5);
-        asignaturas.add(asignatura_6);
-        asignaturas.add(asignatura_7);
-        asignaturas.add(asignatura_8);
-        asignaturas.add(asignatura_9);
-        asignaturas.add(asignatura_10);
-        asignaturas.add(asignatura_11);
-        asignaturas.add(asignatura_12);
-        asignaturas.add(asignatura_13);
-        asignaturas.add(asignatura_14);
-        asignaturas.add(asignatura_15);
-        asignaturas.add(asignatura_16);
-        asignaturas.add(asignatura_17);
-        asignaturas.add(asignatura_18);
-        asignaturas.add(asignatura_19);
-        asignaturas.add(asignatura_20);
-        asignaturas.add(asignatura_21);
-        asignaturas.add(asignatura_22);
-        asignaturas.add(asignatura_23);
+    
         
         //Lista de asignaturas correspondiente al semestre 1
         ArrayList<Asignatura> semestre_1 = new ArrayList<>();
@@ -224,10 +253,6 @@ public class GestionAvanceCurricular {
         
         //Llenado del hashMapp correspondiente a la malla curricular :D
         
-       
-                
-        
-        
         HashMap<String, ArrayList<Asignatura>> mallaCurricular;
         mallaCurricular = new HashMap<>();
         
@@ -241,58 +266,5 @@ public class GestionAvanceCurricular {
         mallaCurricular.put("Sem8", semestre_8);
         
         mc.setMallaCurricular(mallaCurricular);
-    }
-    
-    public static void menuAlumno(){
-        // Con contraseña alumno
-        
-    }
-    
-    public static void menuAdministrador(){
-        // Con contraseña
-        
-    }
-    
-    public static void menuProfesor(){
-        // Con contraseña de profesor
-        
-    }
-    
-    public static void menu(MallaCurricular mc, ArrayList<Profesor> listaProfes)
-    {
-        Scanner lector = new Scanner(System.in);
-        
-        int opcion;
-        do{
-            System.out.println("Opciones");
-            System.out.println("0.- FIN");
-            System.out.println("1.- Agregar ALumno");
-            System.out.println("2.- Mostrar Alumno Inscritos");
-            System.out.println("3.- Agregar asignatura");
-            System.out.println("Ingreses u opcion a elegir puñeta");
-            opcion = lector.nextInt();
-            lector.nextLine();
-            switch (opcion) {
-                case 0 -> {
-                    System.out.println("Fin");
-                    break;
-                }
-                case 1 -> {
-                    //mc(lector, listaProfes);
-                    break;
-                }
-                case 2 -> {
-                    System.out.println(); mc.getMallaCurricular().get("Sem1").get(0).mostrarAlumnosAsignatura();
-                    break;
-                }
-                case 3 -> {
-                    mc.crearAsignaturaPorCosola(lector, listaProfes);
-                    
-                    break;
-            }
-                default -> System.out.println("Numero incorreto");
-            }
-            
-        }while(opcion != 3);
-    }
+    } 
 }
