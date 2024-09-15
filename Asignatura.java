@@ -34,19 +34,15 @@ public class Asignatura {
     }
 
     public String getNombre() { return sNombre; }
-
     public void setNombre(String sNombre) { this.sNombre = sNombre; }
 
     public String getsCodigo() { return sCodigo; }
-
     public void setsCodigo(String sCodigo) { this.sCodigo = sCodigo; }
 
-    public Profesor getProfesorAsignado() { return new Profesor(profesorAsignado); }
-
+    public Profesor getProfesorAsignado() { return profesorAsignado; }
     public void setProfesorAsignado(Profesor profesorAsignado) { this.profesorAsignado = profesorAsignado; }
 
     public Alumno getAlumnosInscritos(Alumno alumnoInscribir) { return buscarAlumnoPorRut(alumnoInscribir.getsRut()); }
-    
     public ArrayList<Alumno> getAlumnosInscritos() { return new ArrayList<>(alAlumnosInscritos); }
     
     /**

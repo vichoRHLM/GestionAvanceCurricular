@@ -1,88 +1,54 @@
 
 package gestionavancecurricular;
-    
+
+import java.util.*;
 /**
  * Clase con los datos necesarios para el manejo de profesores
  */
-public class Profesor {
-    private String sNombre;
-    private String sApellido;
-    private String sFechaNacimiento;
-    private String sRut;
-    private String sCorreoElectronico;
-    
-    public Profesor() {  
-    }
-    
-    public Profesor(Profesor datosProfesor) {  
-        sNombre = datosProfesor.getsNombre();
-        sApellido = datosProfesor.getsApellido();
-        sFechaNacimiento = datosProfesor.getsFechaNacimiento();
-        sRut = datosProfesor.getsRut();
-        sCorreoElectronico = datosProfesor.getsCorreoElectronico();
+public class Profesor extends Persona {
+    private ArrayList<Asignatura> asignaturasAsignadas;
+
+    public Profesor(){
+        super();
+        this.asignaturasAsignadas = new ArrayList<>();
     }
     
     public Profesor(String sNombre, String sApellido, String sFechaNacimiento, String sRut, String sCorreoElectronico) {
-        this.sNombre = sNombre;
-        this.sApellido = sApellido;
-        this.sFechaNacimiento = sFechaNacimiento;
-        this.sRut = sRut;
-        this.sCorreoElectronico = sCorreoElectronico;
+        super(sNombre, sApellido, sFechaNacimiento, sRut, sCorreoElectronico);
+        this.asignaturasAsignadas = new ArrayList<>();
+    }
+    /**
+     * El método <code>obtenerAsignaturas</code> busca una asignatura según su 
+     * código (único) y la devuelve. El método recorre la lista de asignaturas
+     * asignadas del profesor, buscando en cada una de ellas por su código.
+     * @param codAsignatura Identificador único de una asignatura
+     * @return Devuelve el objeto <code>Asignatura</code> que se encontro dentro
+     * del arrayList <code>asignaturasAsignadas</code>.
+     */
+    public Asignatura obtenerAsignaturas(String codAsignatura) {
+        for (int i = 0; i < asignaturasAsignadas.size(); i++)
+        {
+            Asignatura asignaturaAux = (Asignatura) asignaturasAsignadas.get(i);
+            if (asignaturaAux.getsCodigo().equals(codAsignatura))
+                return asignaturaAux;
+        }
+        return null;
     }
     
-    public String getsNombre() { return sNombre; }
-
-    public void setsNombre(String sNombre) { this.sNombre = sNombre; }
-
-    public String getsApellido() { return sApellido; }
-
-    public void setsApellido(String sApellido) { this.sApellido = sApellido; }
-
-    public String getsFechaNacimiento() { return sFechaNacimiento; }
-
-    public void setsFechaNacimiento(String sFechaNacimiento) { this.sFechaNacimiento = sFechaNacimiento; }
-
-    public String getsRut() { return sRut; }
-
-    public void setsRut(String sRut) { 
-        if(validarRut(sRut))
-            this.sRut = sRut; 
+    public ArrayList<Asignatura> obtenerCopiaAsignaturasAsignadas() {
+        return new ArrayList<>(asignaturasAsignadas);
     }
-
-    public String getsCorreoElectronico() { return sCorreoElectronico; }
-
-    public void setsCorreoElectronico(String sCorreoElectronico) { this.sCorreoElectronico = sCorreoElectronico; }
     
     /**
-     * Método que valida el formato de <code>rut</code>. En primer lugar se 
-     * verifica la longitud correcta (se asume 10 como longitud esperada, ya que
-     * el formato es 12345678-9). Luego se verifica que hasta el guión, todos 
-     * los datos sean números. En tercer lugar, se verifica si falta el guión. 
-     * Por último, se verifica que el último carácter sea un dígito o 'k'.
-     * @param rut Identificador unico de una persona. En este caso del alumno.
-     * @return Retorna true en caso de que se cumpla con las validaciones de formato, si no retorna false.
+     * El método agrega una aignatura a la lista de asigntauras asignadas del 
+     * profesor.
+     * 
+     * @param asignatura Objeto tipo <code>Asignatura</code> que se agregará a 
+     * la colección <code>asignaturasAsignadas</code>.
      */
-    public boolean validarRut(String rut) {
-        int largo = rut.length();
-
-        if (largo != 10) {
-            return false;
-        }
-       
-        for (int i = 0; i < 8; i++) {
-            if (!Character.isDigit(rut.charAt(i))) {
-                return false;
-            }
-        }
-
-        if (rut.charAt(8) != '-') {
-            return false;
-        }
-
-        char ultimoCaracter = rut.charAt(9);
-        if (!Character.isDigit(ultimoCaracter) && ultimoCaracter != 'k' && ultimoCaracter != 'K') {
-            return false;
-        }
-        return true;
+    public void asignarAsignatura(Asignatura asignatura) {
+        this.asignaturasAsignadas.add(asignatura);
+        System.out.println("Asignatura asignada al profesor: " + asignatura.getNombre());
+        //HACER ESTE MÉTODO BOOLEANO PARA VALIDAR LA ENTRADA DEL DATO AL ARRAYLIST
     }
 }

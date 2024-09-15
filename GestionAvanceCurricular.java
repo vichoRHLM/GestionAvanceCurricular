@@ -13,10 +13,6 @@ public class GestionAvanceCurricular {
         ArrayList <Profesor> listaProfes = new ArrayList<>();
         llenadoMallaCurricular(mallaInf, listaProfes);
         menu(mallaInf, listaProfes);
-        
-        
-        
-        
     }
     
     
@@ -43,7 +39,6 @@ public class GestionAvanceCurricular {
                 }
                 case 1 -> {
                     mc.menuParaAgregarAlumnoaAsignatura(lector);
-                    
                     break;
                 }
                 case 2 -> {
@@ -52,7 +47,6 @@ public class GestionAvanceCurricular {
                 }
                 case 3 -> {
                     mc.crearAsignaturaPorCosola(lector, listaProfes);
-                    
                     break;
                 }
                 default -> System.out.println("OPCION INCORRECTA, POR FAVOR INTENTE DE NUEVO");
