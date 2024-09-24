@@ -51,4 +51,11 @@ public class Profesor extends Persona {
         System.out.println("Asignatura asignada al profesor: " + asignatura.getNombre());
         //HACER ESTE MÉTODO BOOLEANO PARA VALIDAR LA ENTRADA DEL DATO AL ARRAYLIST
     }
+
+    @Override
+    public String toString() {
+        return "Nombre profesor = " + this.getsNombre() + " " + this.getsApellido();
+    }
+    
+    
 }

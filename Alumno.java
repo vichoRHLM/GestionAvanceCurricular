@@ -30,4 +30,11 @@ public class Alumno extends Persona{
             System.out.println(inscripcion.toString());
         }
     }
+
+    @Override
+    public String toString() {
+        return "Nombre alumno = " + this.getsNombre() + " " + this.getsApellido();
+    }
+    
+    
 }

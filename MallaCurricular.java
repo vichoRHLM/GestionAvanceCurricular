@@ -227,7 +227,7 @@ public class MallaCurricular {
      * ingresados por consola. 
      * @param listaProfes Lista de profesores con datos predefinidos.
      */
-    public void crearAsignaturaPorCosola(Scanner lector, ArrayList <Profesor> listaProfes ) {
+    public void crearAsignaturaPorConsola(Scanner lector, ArrayList <Profesor> listaProfes ) {
         System.out.println("1.- Codigo de la asignatura: ");
         String codigoAsignatura = lector.nextLine();
         if (buscarAsignatura(codigoAsignatura) != null) {
@@ -245,11 +245,11 @@ public class MallaCurricular {
                 nuevaAsignatura.setNombre(lector.nextLine());
 
                 do{
-                    System.out.println("3.- Ingrese el RUT del profesor a asignar: ");
+                    System.out.println("3.- Ingrese el RUT del profesor a asignar:(Formto : 12345678-9)");
                     String rut = lector.nextLine();
                     nuevaAsignatura.asignarProfesorExistente(rut, listaProfes);
                     if(nuevaAsignatura.getProfesorAsignado() == null)
-                        System.out.println("No se encontro un profesor con el rut ingresado. Vuelva a intentarlo");
+                        System.out.println("El profesor no se encuentra en los datos o el rut esta mal escrito");
                 }while(nuevaAsignatura.getProfesorAsignado() == null);
                 mallaCurricular.get(semestre).add(nuevaAsignatura);
                 

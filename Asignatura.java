@@ -102,6 +102,8 @@ public class Asignatura {
         for (int i = 0; i < listaProfes.size();i++)
         {
             Profesor profesorBuscado = listaProfes.get(i);
+            if(!profesorBuscado.validarRut(rut))
+                return null;
             if(profesorBuscado.getsRut().equals(rut))
                 return profesorBuscado;
         }
@@ -147,6 +149,11 @@ public class Asignatura {
     public void agregarAlumnoPorConsola(Scanner lector, ArrayList<Alumno> listaAlumnos){
         String rutNuevo; 
         Alumno alumnoPorAgregar = new Alumno();
+        
+        if (listaAlumnos.size() <= 0){
+            System.out.println("LA LISTA DE ALUMNOS SE ENCUENTRA VACIA");
+            return ;
+        }
         
         do{
             System.out.println("Ingrese rut del alumno que desea agregar a la asignatura : ");
