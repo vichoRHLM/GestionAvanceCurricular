@@ -20,7 +20,7 @@ public class Profesor extends Persona {
     /**
      * El método <code>obtenerAsignaturas</code> busca una asignatura según su 
      * código (único) y la devuelve. El método recorre la lista de asignaturas
-     * asignadas del profesor, buscando en cada una de ellas por su código.
+     * asignadas del profesor, buscando en cada una de ellas su código.
      * @param codAsignatura Identificador único de una asignatura
      * @return Devuelve el objeto <code>Asignatura</code> que se encontro dentro
      * del arrayList <code>asignaturasAsignadas</code>.
@@ -56,6 +56,4 @@ public class Profesor extends Persona {
     public String toString() {
         return "Nombre profesor = " + this.getsNombre() + " " + this.getsApellido();
     }
-    
-    
 }

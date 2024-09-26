@@ -150,9 +150,10 @@ public class MallaCurricular {
      * Menú usado para agregar un alumno a una asignatura
      * @param lector Objeto de tipo <code>Scanner</code> usado para leer 
      * datos ingresados por consola. 
+     * @param alumnosAInscribir 
+     * @throws ErrorDeLecturaArchivoException 
      */
-    public void menuParaAgregarAlumnoaAsignatura(Scanner lector){
- 
+    public void menuParaAgregarAlumnoaAsignatura(Scanner lector, ArrayList<Alumno> alumnosAInscribir) throws ErrorDeLecturaArchivoException{
         String sCodigoAsignaturaBuscado;
         Asignatura asignaturaBuscada;
         
@@ -165,7 +166,7 @@ public class MallaCurricular {
                 System.out.println("No se encontro una asignatura con ese codigo, porfavor vuelva a intentar.");
             }else
             {
-                asignaturaBuscada.agregarAlumnoPorConsola(lector,asignaturaBuscada.getAlumnosInscritos());
+                asignaturaBuscada.agregarAlumnoPorConsola(lector, alumnosAInscribir);
             }
         }while(asignaturaBuscada == null);
     }

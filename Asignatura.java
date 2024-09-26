@@ -1,6 +1,12 @@
 
 package gestionavancecurricular;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -141,19 +147,15 @@ public class Asignatura {
         return null;
     }
     
-    /**
+   /**
      * Método que agrega un alumno a <code>alAlumnosInscritos</code> según el rut ingresado por consola.
-     * @param lector Objeto de tipo <code>Scanner</code> usado para leer datos ingresados por consola. 
-     * @param listaAlumnos Lista de alumnos con datos predefinidos.
+     * @param lector Objeto de tipo <code>Scanner</code> usado para leer datos ingresados por consola.
+     * @param listaAlumnos
+     * @throws ErrorDeLecturaArchivoException
      */
-    public void agregarAlumnoPorConsola(Scanner lector, ArrayList<Alumno> listaAlumnos){
+    public void agregarAlumnoPorConsola(Scanner lector, ArrayList<Alumno> listaAlumnos)throws ErrorDeLecturaArchivoException{
         String rutNuevo; 
         Alumno alumnoPorAgregar = new Alumno();
-        
-        if (listaAlumnos.size() <= 0){
-            System.out.println("LA LISTA DE ALUMNOS SE ENCUENTRA VACIA");
-            return ;
-        }
         
         do{
             System.out.println("Ingrese rut del alumno que desea agregar a la asignatura : ");
@@ -167,7 +169,55 @@ public class Asignatura {
         }while(alumnoPorAgregar == null);
         
         setAlumnosInscritos(alumnoPorAgregar);
-                   
+        actualizarAsignaturaCSVConAlumno(alumnoPorAgregar.getsRut(), "src\\resource\\asignaturas.csv");
+        
+    }
+
+    
+    private void actualizarAsignaturaCSVConAlumno(String rutAlumnoNuevo, String rutaArchivoCSV)throws ErrorDeLecturaArchivoException{
+        // Leer todo el contenido del archivo CSV y almacenarlo en memoria
+        List<String> lineasCSV = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivoCSV))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                lineasCSV.add(linea);
+            }
+        }catch(IOException e){
+            throw new ErrorDeLecturaArchivoException(e);
+        }
+
+        // Modificar la línea correspondiente a la asignatura actual
+        for (int i = 0; i < lineasCSV.size(); i++) {
+            String[] datos = lineasCSV.get(i).split(";", -1); // Preservar campos vacíos
+            String nombreAsignatura = datos[0];
+            String codigoAsignatura = datos[1];
+            String rutsAlumnos = datos.length > 2 ? datos[2] : "";
+
+            if (codigoAsignatura.equals(this.sCodigo)) {
+                // Agregar el RUT del alumno al final de la lista, si no está ya incluido
+                if (!rutsAlumnos.contains(rutAlumnoNuevo)) {
+                    if (!rutsAlumnos.isEmpty()) {
+                        rutsAlumnos += ","; // Añadir coma si ya hay otros alumnos
+                    }
+                    rutsAlumnos += rutAlumnoNuevo;
+
+                    // Actualizar la línea del archivo CSV con los nuevos datos
+                    lineasCSV.set(i, nombreAsignatura + ";" + codigoAsignatura + ";" + rutsAlumnos + ";");
+                }
+            }
+        }
+
+        // Sobrescribir el archivo CSV con los cambios realizados
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaArchivoCSV))) {
+            for (int j = 0; j < lineasCSV.size();j++ )
+            {
+                String lin = (String) lineasCSV.get(j);
+                bw.write(lin);
+                bw.newLine(); // Añadir una nueva línea después de cada entrada
+            }
+        }catch(IOException e){
+            throw new ErrorDeLecturaArchivoException(e);
+        }
     }
     
     /**
@@ -179,4 +229,11 @@ public class Asignatura {
             System.out.println(alAlumnosInscritos.get(i).getsNombre() + " " + alAlumnosInscritos.get(i).getsApellido());
         }
     }
+
+    @Override
+    public String toString() {
+        return "Asignatura = " + sNombre +  ", Codigo = " + sCodigo + ", profesorAsignado=  " + profesorAsignado.getsNombre() + " " + profesorAsignado.getsApellido();
+    }
+    
+    
 }
