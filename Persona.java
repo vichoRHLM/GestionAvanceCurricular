@@ -1,19 +1,24 @@
-
 package gestionavancecurricular;
 
 /**
- *
- * @author Sebastian Espinoza Rivera
- * 
- * 
+ * La clase Persona es una clase base que almacena información común relacionada 
+ * con una persona, como el nombre, apellido, fecha de nacimiento, RUT 
+ * (identificador unico) y correo electrónico. La clase se compone de atributos 
+ * protegidos, constructores para inicializar los datos, métodos getter y 
+ * setter, así como algunos métodos adicionales que permiten la modificación y 
+ * validación de la información de la persona.
  */
 public class Persona {
+    /******ATRIBUTOS******/
     protected String sNombre;
     protected String sApellido;
     protected String sFechaNacimiento;
     protected String sRut;
     protected String sCorreoElectronico;
-
+    /******FIN ATRIBUTOS******/
+    
+    
+    /******CONSTRUCTORES******/
      public Persona(){
          this.sNombre = "";
         this.sApellido = "";
@@ -22,6 +27,7 @@ public class Persona {
         this.sCorreoElectronico = "";
      }
     
+     
     public Persona(String sNombre, String sApellido, String sFechaNacimiento, String sRut, String sCorreoElectronico) {
         this.sNombre = sNombre;
         this.sApellido = sApellido;
@@ -29,7 +35,10 @@ public class Persona {
         this.sRut = sRut;
         this.sCorreoElectronico = sCorreoElectronico;
     }
-
+    /******FIN CONSTRUCTORES******/
+    
+    
+    /******SETTERS Y GETTERS******/
     public String getsNombre() { return sNombre; }
     public void setsNombre(String sNombre) { this.sNombre = sNombre; }
 
@@ -40,13 +49,31 @@ public class Persona {
     public void setsFechaNacimiento(String sFechaNacimiento) { this.sFechaNacimiento = sFechaNacimiento; }
 
     public String getsRut() { return sRut; }
-     public void setsRut(String sRut) { 
+    public void setsRut(String sRut) { 
         if(validarRut(sRut))
             this.sRut = sRut; 
     }
-
     public String getsCorreoElectronico() { return sCorreoElectronico; }
     public void setsCorreoElectronico(String sCorreoElectronico) { this.sCorreoElectronico = sCorreoElectronico; }
+    /******FIN SETTERS Y GETTERS******/
+    
+    
+    /******METODOS******/
+    /**
+     * El método recibe por parámetro los datos a modificar de la persona. Cambia 
+     * los valores del nombre, apellido y correo de la persona en ese orden.
+     * @param nombre Nombre que va a ser cambiado. Tipo <code>String</code>
+     * @param apellido Apellido que va a ser cambiado. Tipo <code>String</code>
+     * @param correo Correo electronico que va a ser cambiado. Tipo <code>String</code>
+    */
+    public void modificarCaracteristica(String nombre, String apellido,String correo){
+        this.setsNombre(nombre);
+        this.setsApellido(apellido);
+        this.setsCorreoElectronico(correo);
+    }
+    
+    
+    
     
     /**
      * Método que valida el formato de <code>rut</code>. En primer lugar se 
@@ -75,14 +102,20 @@ public class Persona {
         }
 
         char ultimoCaracter = rut.charAt(9);
+        
         if (!Character.isDigit(ultimoCaracter) && ultimoCaracter != 'k' && ultimoCaracter != 'K') {
             return false;
         }
+        
         return true;
     }
 
+    
+    
+    
     @Override
     public String toString() {
         return "Persona{" + "sNombre=" + sNombre + ", sApellido=" + sApellido + ", sFechaNacimiento=" + sFechaNacimiento + ", sRut=" + sRut + ", sCorreoElectronico=" + sCorreoElectronico + '}';
     }
+    /******FIN METODOS******/
 }

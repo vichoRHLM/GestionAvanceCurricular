@@ -40,6 +40,10 @@ public class Inscripcion {
         this.aprobada = nota >= 4.0;
     }
     
+    public String getCodigoAsignatura () {return asignatura.getsCodigo(); }
+    
+    public Asignatura getCopiaAsignatura() { return new Asignatura(this.asignatura); }
+    
     public void setAprobada(boolean aprobada){ this.aprobada = aprobada; }
     public boolean isAprobada() { return aprobada; }
 
@@ -48,7 +52,12 @@ public class Inscripcion {
 
     @Override
     public String toString() {
-        return "Inscripcion : " + "Alumno = " + alumno + ", asignatura = " + asignatura + ", nota = " + nota + ", situacion academica = " + aprobada + ", semestre cursado = " + semestre;
+        String situacion;
+        
+        if(aprobada) situacion = "APROBADA";
+        else situacion = "REPROBADA";
+        
+        return asignatura.getsCodigo()+", "+asignatura.getNombre()+", "+ Double.toString(nota)+", "+(String)situacion+", "+(String)semestre+"\n";
     }
     
 }
